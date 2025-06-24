@@ -3,10 +3,9 @@ import 'package:fruit_hub_bashbord/feature/dashbord/presentation/views/dashbord_
 
 Route<dynamic> onGenerateRoute(RouteSettings setting) {
   switch (setting.name) {
-    case DashbordView.id:
-      return MaterialPageRoute(builder: (context) => const DashbordView());
+    case DashboardView.id:
+      return MaterialPageRoute(builder: (context) => const DashboardView());
 
-   
     default:
       return MaterialPageRoute(
         builder:
