@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_hub_bashbord/core/widgets/build_app_bar.dart';
-import 'package:fruit_hub_bashbord/feature/dashbord/presentation/views/widgets/add_prodact_body.dart';
+import 'package:fruit_hub_bashbord/feature/add_product/presentation/views/widgets/add_prodact_body.dart';
 
 class AddProdact extends StatelessWidget {
   const AddProdact({super.key});
