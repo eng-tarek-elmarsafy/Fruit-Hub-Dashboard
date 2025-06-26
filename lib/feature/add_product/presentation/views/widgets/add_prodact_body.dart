@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub_bashbord/core/utils/app_color.dart';
 import 'package:fruit_hub_bashbord/core/widgets/custom_button.dart';
 import 'package:fruit_hub_bashbord/core/widgets/custom_text_form_field.dart';
 import 'package:fruit_hub_bashbord/core/widgets/is_featured_item.dart';
 import 'package:fruit_hub_bashbord/core/widgets/product_image.dart';
+import 'package:fruit_hub_bashbord/feature/add_product/domain/entities/product_entity.dart';
 import 'dart:io';
+
+import 'package:fruit_hub_bashbord/feature/add_product/presentation/manager/add_proaduct_cubit/add_proaduct_cubit.dart';
 
 class AddProdactBody extends StatefulWidget {
   const AddProdactBody({super.key});
@@ -19,7 +23,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
 
   late String name, code, description;
   late num price;
-  late File? image;
+  File? image;
   bool isFeatured = false;
 
   @override
@@ -119,6 +123,16 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                           );
                         }
                         formKey.currentState!.save();
+                        context.read<AddProaductCubit>().addProduct(
+                          ProductEntity(
+                            imageFile: image!,
+                            name: name,
+                            price: price.toString(),
+                            code: code,
+                            description: description,
+                            isFeatured: isFeatured,
+                          ),
+                        );
                       } else {
                         autovalidateMode = AutovalidateMode.always;
                         setState(() {});
