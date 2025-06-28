@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.maxLines,
     this.inputFormatters,
+    this.textController,
   });
   final TextInputType? textInputType;
   final String hintText;
@@ -23,9 +24,11 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
+  final TextEditingController? textController;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: textController,
       inputFormatters: inputFormatters,
       maxLines: maxLines,
       onSaved: onSaved,
