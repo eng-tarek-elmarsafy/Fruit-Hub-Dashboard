@@ -15,7 +15,7 @@ class ChackBoxItem extends StatelessWidget {
     return Row(
       children: [
         CustomChackBox(onChacked: onChacked),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Text(titile, style: AppStyle.basaBold.copyWith(color: Colors.black)),
       ],
     );

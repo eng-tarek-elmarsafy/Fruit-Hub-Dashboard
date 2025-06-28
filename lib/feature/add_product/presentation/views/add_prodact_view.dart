@@ -19,7 +19,10 @@ class AddProdactView extends StatelessWidget {
       create:
           (context) =>
               AddProaductCubit(getIt<ImagesRepo>(), getIt<ProductRepo>()),
-      child: Scaffold(appBar: buildAppBar(), body: AddProaductBlocConsumer()),
+      child: Scaffold(
+        appBar: buildAppBar(),
+        body: const AddProaductBlocConsumer(),
+      ),
     );
   }
 }
@@ -33,12 +36,14 @@ class AddProaductBlocConsumer extends StatelessWidget {
       listener: (context, state) {
         if (state is AddProaductFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('حدث خطأ', style: AppStyle.basaRegular)),
+            const SnackBar(
+              content: Text('حدث خطأ', style: AppStyle.basaRegular),
+            ),
           );
         }
         if (state is AddProaductSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('تمت العملية بنجاح', style: AppStyle.basaRegular),
             ),
           );
@@ -47,7 +52,7 @@ class AddProaductBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: state is AddProaductLoading,
-          child: AddProdactBody(),
+          child: const AddProdactBody(),
         );
       },
     );

@@ -6,6 +6,6 @@ class DashboardView extends StatelessWidget {
   static const String id = 'dashbord_view';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: DashboardViewBody());
+    return const Scaffold(body: DashboardViewBody());
   }
 }

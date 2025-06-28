@@ -1,6 +1,23 @@
 import 'package:fruit_hub_bashbord/feature/add_product/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
+  factory ProductModel.fromEntity(ProductEntity entity) {
+    return ProductModel(
+      name: entity.name,
+      price: entity.price,
+      code: entity.code,
+      description: entity.description,
+      imageUrl: entity.imageUrl,
+      imageFile: entity.imageFile,
+      isFeatured: entity.isFeatured,
+      expirationsMonths: entity.expirationsMonths,
+      isOrganic: entity.isOrganic,
+      numberOfCaloris: entity.numberOfCaloris,
+      avgRating: entity.avgRating,
+      unitAmount: entity.unitAmount,
+      ratingCount: entity.ratingCount,
+    );
+  }
   ProductModel({
     required super.imageFile,
     required super.name,
@@ -31,23 +48,5 @@ class ProductModel extends ProductEntity {
       'description': description,
       'imageUrl': imageUrl,
     };
-  }
-
-  factory ProductModel.fromEntity(ProductEntity entity) {
-    return ProductModel(
-      name: entity.name,
-      price: entity.price,
-      code: entity.code,
-      description: entity.description,
-      imageUrl: entity.imageUrl,
-      imageFile: entity.imageFile,
-      isFeatured: entity.isFeatured,
-      expirationsMonths: entity.expirationsMonths,
-      isOrganic: entity.isOrganic,
-      numberOfCaloris: entity.numberOfCaloris,
-      avgRating: entity.avgRating,
-      unitAmount: entity.unitAmount,
-      ratingCount: entity.ratingCount,
-    );
   }
 }

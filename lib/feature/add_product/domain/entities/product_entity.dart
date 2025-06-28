@@ -1,20 +1,6 @@
 import 'dart:io';
 
 class ProductEntity {
-  final String name;
-  final String price;
-  final String code;
-  final String description;
-  final File imageFile;
-  final bool isFeatured;
-  String? imageUrl;
-  final int expirationsMonths;
-  final bool isOrganic;
-  final int numberOfCaloris;
-  final num avgRating;
-  final num ratingCount;
-  final num unitAmount;
-
   ProductEntity({
     required this.isFeatured,
     required this.imageFile,
@@ -30,4 +16,17 @@ class ProductEntity {
     this.ratingCount = 0,
     required this.unitAmount,
   });
+  final String name;
+  final String price;
+  final String code;
+  final String description;
+  final File imageFile;
+  final bool isFeatured;
+  String? imageUrl;
+  final int expirationsMonths;
+  final bool isOrganic;
+  final int numberOfCaloris;
+  final num avgRating;
+  final num ratingCount;
+  final num unitAmount;
 }

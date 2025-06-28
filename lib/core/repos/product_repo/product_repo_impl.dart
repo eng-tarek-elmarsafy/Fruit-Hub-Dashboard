@@ -7,9 +7,8 @@ import 'package:fruit_hub_bashbord/feature/add_product/data/models/product_model
 import 'package:fruit_hub_bashbord/feature/add_product/domain/entities/product_entity.dart';
 
 class ProductRepoImpl implements ProductRepo {
-  final FirebaseFirestoreService firebaseFirestoreService;
-
   ProductRepoImpl({required this.firebaseFirestoreService});
+  final FirebaseFirestoreService firebaseFirestoreService;
 
   @override
   Future<Either<Failure, void>> addProducts(ProductEntity productEntity) async {

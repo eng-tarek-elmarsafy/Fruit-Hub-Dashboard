@@ -67,7 +67,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -89,7 +89,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   CustomTextFormField(
                     textController: textController2,
                     hintText: 'price',
@@ -105,7 +105,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   CustomTextFormField(
                     textController: textController3,
                     textInputType: TextInputType.number,
@@ -121,7 +121,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   CustomTextFormField(
                     textController: textController4,
                     textInputType: TextInputType.number,
@@ -137,7 +137,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   CustomTextFormField(
                     textController: textController5,
                     textInputType: TextInputType.number,
@@ -153,7 +153,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   CustomTextFormField(
                     textController: textController6,
                     hintText: 'Code',
@@ -167,10 +167,10 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   CustomTextFormField(
                     textController: textController7,
-                    hintText: 'Product Descirpiton',
+                    hintText: 'Description',
                     maxLines: 5,
                     onSaved: (p0) {
                       description = p0!;
@@ -182,38 +182,39 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ChackBoxItem(
                     onChacked: (bool value) {
                       isFeatured = value;
                     },
                     titile: "Is Featured Item",
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ChackBoxItem(
                     onChacked: (bool value) {
                       isOrganic = value;
                     },
                     titile: 'Is Organic',
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ProductImage(
                     onChanged: (File xImage) {
                       image = xImage;
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   CustomButton(
                     title: 'Add data',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         if (image == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('يجب اختيار صورة'),
                               backgroundColor: AppColor.green500,
                             ),
                           );
+                          return;
                         }
 
                         if (image != null) {
@@ -239,6 +240,12 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                           textController5.clear();
                           textController6.clear();
                           textController7.clear();
+                          formKey.currentState!.reset();
+                          image = null;
+                          isFeatured = false;
+                          isOrganic = false;
+                          autovalidateMode = AutovalidateMode.disabled;
+                          setState(() {});
                         }
                       } else {
                         autovalidateMode = AutovalidateMode.always;
@@ -246,7 +253,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                       }
                     },
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),

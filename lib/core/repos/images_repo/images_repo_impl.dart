@@ -6,9 +6,8 @@ import 'package:fruit_hub_bashbord/core/repos/images_repo/images_repo.dart';
 import 'package:fruit_hub_bashbord/core/service/upload_file.dart';
 
 class ImagesRepoImpl implements ImagesRepo {
-  final UploadFileService uploadFileService;
-
   ImagesRepoImpl({required this.uploadFileService});
+  final UploadFileService uploadFileService;
   @override
   Future<Either<Failure, String>> uploadImages(File image, String path) async {
     try {
