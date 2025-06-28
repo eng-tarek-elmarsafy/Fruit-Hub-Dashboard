@@ -1,3 +1,4 @@
+import 'package:fruit_hub_bashbord/feature/add_product/data/models/review_model.dart';
 import 'package:fruit_hub_bashbord/feature/add_product/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
@@ -16,6 +17,7 @@ class ProductModel extends ProductEntity {
       avgRating: entity.avgRating,
       unitAmount: entity.unitAmount,
       ratingCount: entity.ratingCount,
+      review: entity.review,
     );
   }
   ProductModel({
@@ -32,6 +34,7 @@ class ProductModel extends ProductEntity {
     super.avgRating = 0,
     super.ratingCount = 0,
     required super.unitAmount,
+    required super.review,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -47,6 +50,8 @@ class ProductModel extends ProductEntity {
       'expirationsMonths': expirationsMonths,
       'description': description,
       'imageUrl': imageUrl,
+      'review':
+          review.map((e) => ReviewModel.fromReviewEntity(e).toJson()).toList(),
     };
   }
 }

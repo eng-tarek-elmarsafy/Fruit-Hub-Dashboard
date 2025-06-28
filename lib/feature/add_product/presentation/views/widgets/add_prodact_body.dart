@@ -231,6 +231,7 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                               expirationsMonths: expirationMonths,
                               numberOfCaloris: numberOfCalories,
                               isOrganic: isOrganic,
+                              review: [],
                             ),
                           );
                           textController1.clear();
