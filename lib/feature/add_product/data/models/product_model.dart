@@ -9,48 +9,28 @@ class ProductModel extends ProductEntity {
     required super.description,
     super.imageUrl,
     required super.isFeatured,
+    required super.expirationsMonths,
+    required super.isOrganic,
+    required super.numberOfCaloris,
+    super.avgRating = 0,
+    super.ratingCount = 0,
+    required super.unitAmount,
   });
   Map<String, dynamic> toJson() {
     return {
       'name': name,
       'price': price,
       'code': code,
+      'isFeatured': isFeatured,
+      'isOrganic': isOrganic,
+      'numberOfCaloris': numberOfCaloris,
+      'avgRating': avgRating,
+      'ratingCount': ratingCount,
+      'unitAmount': unitAmount,
+      'expirationsMonths': expirationsMonths,
       'description': description,
       'imageUrl': imageUrl,
     };
-  }
-
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      name: json['name'],
-      price: json['price'],
-      code: json['code'],
-      description: json['description'],
-      imageUrl: json['imageUrl'],
-      imageFile: json['imageFile'],
-      isFeatured: json['isFeatured'] ?? false,
-    );
-  }
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'price': price,
-      'code': code,
-      'description': description,
-      'imageUrl': imageUrl,
-    };
-  }
-
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
-    return ProductModel(
-      name: map['name'],
-      price: map['price'],
-      code: map['code'],
-      description: map['description'],
-      imageUrl: map['imageUrl'],
-      imageFile: map['imageFile'],
-      isFeatured: map['isFeatured'] ?? false,
-    );
   }
 
   factory ProductModel.fromEntity(ProductEntity entity) {
@@ -62,6 +42,12 @@ class ProductModel extends ProductEntity {
       imageUrl: entity.imageUrl,
       imageFile: entity.imageFile,
       isFeatured: entity.isFeatured,
+      expirationsMonths: entity.expirationsMonths,
+      isOrganic: entity.isOrganic,
+      numberOfCaloris: entity.numberOfCaloris,
+      avgRating: entity.avgRating,
+      unitAmount: entity.unitAmount,
+      ratingCount: entity.ratingCount,
     );
   }
 }

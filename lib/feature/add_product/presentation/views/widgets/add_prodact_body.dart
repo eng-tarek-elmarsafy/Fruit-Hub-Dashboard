@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub_bashbord/core/utils/app_color.dart';
 import 'package:fruit_hub_bashbord/core/widgets/custom_button.dart';
 import 'package:fruit_hub_bashbord/core/widgets/custom_text_form_field.dart';
-import 'package:fruit_hub_bashbord/core/widgets/is_featured_item.dart';
+import 'package:fruit_hub_bashbord/core/widgets/chack_box_item.dart';
 import 'package:fruit_hub_bashbord/core/widgets/product_image.dart';
 import 'package:fruit_hub_bashbord/feature/add_product/domain/entities/product_entity.dart';
 import 'dart:io';
@@ -24,7 +25,11 @@ class _AddProdactBodyState extends State<AddProdactBody> {
   late String name, code, description;
   late num price;
   File? image;
-  bool isFeatured = false;
+  late bool isFeatured;
+  late bool isOrganic;
+  late int expirationMonths;
+  late int numberOfCalories;
+  late int unitAmount;
 
   @override
   void initState() {
@@ -42,10 +47,11 @@ class _AddProdactBodyState extends State<AddProdactBody> {
           SliverToBoxAdapter(
             child: Form(
               key: formKey,
+              autovalidateMode: autovalidateMode,
               child: Column(
                 children: [
                   CustomTextFormField(
-                    hintText: 'Product name',
+                    hintText: 'name',
                     onSaved: (p0) {
                       name = p0!;
                     },
@@ -58,8 +64,9 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                   ),
                   SizedBox(height: 16),
                   CustomTextFormField(
-                    hintText: 'Product price',
+                    hintText: 'price',
                     textInputType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     onSaved: (p0) {
                       price = num.parse(p0!);
                     },
@@ -72,7 +79,52 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                   ),
                   SizedBox(height: 16),
                   CustomTextFormField(
-                    hintText: 'Product code',
+                    textInputType: TextInputType.number,
+                    hintText: 'Expiration months',
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onSaved: (p0) {
+                      expirationMonths = int.tryParse(p0!) ?? 0;
+                    },
+                    validator: (p0) {
+                      if (p0 == null || p0.isEmpty) {
+                        return 'هذا الحقل مطلوب';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  CustomTextFormField(
+                    textInputType: TextInputType.number,
+                    hintText: 'Number of calories',
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onSaved: (p0) {
+                      numberOfCalories = int.tryParse(p0!) ?? 0;
+                    },
+                    validator: (p0) {
+                      if (p0 == null || p0.isEmpty) {
+                        return 'هذا الحقل مطلوب';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  CustomTextFormField(
+                    textInputType: TextInputType.number,
+                    hintText: 'Unit Amount',
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onSaved: (p0) {
+                      unitAmount = int.tryParse(p0!) ?? 0;
+                    },
+                    validator: (p0) {
+                      if (p0 == null || p0.isEmpty) {
+                        return 'هذا الحقل مطلوب';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  CustomTextFormField(
+                    hintText: 'Code',
                     onSaved: (p0) {
                       code = p0!.toLowerCase();
                     },
@@ -98,10 +150,18 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                     },
                   ),
                   SizedBox(height: 16),
-                  IsFeaturedItem(
+                  ChackBoxItem(
                     onChacked: (bool value) {
                       isFeatured = value;
                     },
+                    titile: "Is Featured Item",
+                  ),
+                  SizedBox(height: 16),
+                  ChackBoxItem(
+                    onChacked: (bool value) {
+                      isOrganic = value;
+                    },
+                    titile: 'Is Organic',
                   ),
                   SizedBox(height: 16),
                   ProductImage(
@@ -122,23 +182,31 @@ class _AddProdactBodyState extends State<AddProdactBody> {
                             ),
                           );
                         }
-                        formKey.currentState!.save();
-                        context.read<AddProaductCubit>().addProduct(
-                          ProductEntity(
-                            imageFile: image!,
-                            name: name,
-                            price: price.toString(),
-                            code: code,
-                            description: description,
-                            isFeatured: isFeatured,
-                          ),
-                        );
+
+                        if (image != null) {
+                          formKey.currentState!.save();
+                          context.read<AddProaductCubit>().addProduct(
+                            ProductEntity(
+                              imageFile: image!,
+                              name: name,
+                              price: price.toString(),
+                              code: code,
+                              description: description,
+                              isFeatured: isFeatured,
+                              unitAmount: unitAmount,
+                              expirationsMonths: expirationMonths,
+                              numberOfCaloris: numberOfCalories,
+                              isOrganic: isOrganic,
+                            ),
+                          );
+                        }
                       } else {
                         autovalidateMode = AutovalidateMode.always;
                         setState(() {});
                       }
                     },
                   ),
+                  SizedBox(height: 24),
                 ],
               ),
             ),

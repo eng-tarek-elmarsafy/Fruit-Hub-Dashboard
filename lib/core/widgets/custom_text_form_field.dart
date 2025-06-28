@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fruit_hub_bashbord/core/utils/app_color.dart';
 import 'package:fruit_hub_bashbord/core/utils/app_style.dart';
 
@@ -12,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.obscureText = false,
     this.maxLines,
+    this.inputFormatters,
   });
   final TextInputType? textInputType;
   final String hintText;
@@ -20,9 +22,11 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: inputFormatters,
       maxLines: maxLines,
       onSaved: onSaved,
       validator: validator,
